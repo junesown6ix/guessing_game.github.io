@@ -16,6 +16,8 @@ let maxAttempts = 5;
 
 let gameInProgress = false; // keep track of game play
 newGame.disabled = true; // disable new game button initially
+let gameWon = false; // Flag to track game won
+let gameLost = false; // Flag to track game lost
 
 // console.log(targetNumber);
 
@@ -63,10 +65,12 @@ checkGuess.addEventListener('click', (e) => {
     let attemptsLeft = maxAttempts - attempts;
 
     if (userInput === targetNumber) {
+        gameWon = true;
         dspMsg.textContent = `${getRandomMessage(congratulatoryMessages)} You guessed the correct number "${targetNumber}" in ${attempts} attempt(s).`;
         document.querySelector("#check-guess").disabled = true;
         disableGame(); // call function to disable game
     } else if (attempts === maxAttempts) { // Check if user has exhausted all attempts
+        gameLost = true;
         dspMsg.textContent = `${getRandomMessage(quirkyMessages)} The correct number was ${targetNumber}.`;
         document.querySelector("#check-guess").disabled = true;
         disableGame(); // call function to disable game
