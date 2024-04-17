@@ -40,6 +40,31 @@ let maxAttempts = 10;
 
 // console.log(targetNumber);
 
+// using array for quirky/sarcastic messages
+const quirkyMessages = [
+  "Looks like guessing isn't your strong suit!",
+  "Guessing games are hard, aren't they?",
+  "The number was right there! Better luck next time.",
+  "Are you trying to confuse the computer?",
+  "Guessing is tough work, huh?"
+];
+
+// array for congratulatory messages
+const congratulatoryMessages = [
+  "Congratulations! You're a guessmaster!",
+  "Wow! You guessed it right!",
+  "Impressive! You got it!",
+  "You nailed it! Well done!",
+  "Bravo! You're a guessing pro!"
+];
+
+// function to select a random message from an array
+function getRandomMessage(messagesArray) {
+  const randomArrayIndex = Math.floor(Math.random() * messagesArray.length);
+  return messagesArray[randomArrayIndex];
+}
+
+
 
 
 checkGuess.addEventListener('click', (e) => {
@@ -55,7 +80,7 @@ checkGuess.addEventListener('click', (e) => {
     let attemptsLeft = maxAttempts - attempts;
 
     if (userInput === targetNumber) {
-        dspMsg.textContent = `Congratulations! You guessed the correct number "${targetNumber}" in ${attempts} attempt(s).`;
+        dspMsg.textContent = `${getRandomMessage(congratulatoryMessages)} You guessed the correct number "${targetNumber}" in ${attempts} attempt(s).`;
         document.querySelector("#check-guess").disabled = true;
     } else if (userInput < targetNumber) {
         dspMsg.textContent = "Too low! Try again.";
@@ -66,10 +91,11 @@ checkGuess.addEventListener('click', (e) => {
     attemptsElement.textContent = `Attempts left: ${attemptsLeft}`;
 
     if (attempts === maxAttempts) {
-        dspMsg.textContent = `Sorry, you've run out of attempts. The correct number was ${targetNumber}.`;
+        dspMsg.textContent = `${getRandomMessage(quirkyMessages)} The correct number was ${targetNumber}.`;
         document.querySelector("#check-guess").disabled = true;
     }
 });
+
 
 
 
