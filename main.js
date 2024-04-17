@@ -48,6 +48,10 @@ function getRandomMessage(messagesArray) {
 
 checkGuess.addEventListener('click', (e) => {
     e.preventDefault();
+    if (!gameInProgress) {
+        gameInProgress = true; // Set game in progress
+        newGame.disabled = true; // Disable New Game button
+    }
     userInput = parseInt(document.querySelector("#user-input").value);
 
     if (isNaN(userInput) || userInput < minNumber || userInput > maxNumber) {
@@ -62,6 +66,11 @@ checkGuess.addEventListener('click', (e) => {
         dspMsg.textContent = `${getRandomMessage(congratulatoryMessages)} You guessed the correct number "${targetNumber}" in ${attempts} attempt(s).`;
         document.querySelector("#check-guess").disabled = true;
         disableGame(); // call function to disable game
+    } else if (attempts === maxAttempts) { // Check if user has exhausted all attempts
+        dspMsg.textContent = `${getRandomMessage(quirkyMessages)} The correct number was ${targetNumber}.`;
+        document.querySelector("#check-guess").disabled = true;
+        disableGame(); // call function to disable game
+    
     } else if (userInput < targetNumber) {
         dspMsg.textContent = "Too low! Try again.";
     } else {
