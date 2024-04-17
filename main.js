@@ -88,6 +88,12 @@ checkGuess.addEventListener('click', (e) => {
         document.querySelector("#check-guess").disabled = true;
         disableGame(); // call function to disable game
     }
+
+  // Check if the game is over and the last attempt was successful
+    if ((gameWon || gameLost) && attempts === maxAttempts && userInput === targetNumber) {
+        // Update message to congratulate the user instead of displaying a quirky message
+        dspMsg.textContent = `${getRandomMessage(congratulatoryMessages)} You guessed the correct number "${targetNumber}" in ${attempts} attempt(s).`;
+    }
   document.querySelector("#user-input").value = "";
 });
 
