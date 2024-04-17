@@ -1,28 +1,5 @@
 "use strict";
 
-// while (attempts < maxAttempts) {
-//     guess = parseInt(prompt(`Guess a number between ${minNumber} and ${maxNumber} (${maxAttempts - attempts} attempts left): `));
-
-//     if (isNaN(guess) || guess < minNumber || guess > maxNumber) {
-//         console.log("Please enter a valid number within the specified range.");
-//         continue;
-//     }
-
-//     attempts++;
-
-//     if (guess === targetNumber) {
-//         console.log(`Congratulations! You guessed the correct number ${targetNumber} in ${attempts} attempt(s).`);
-//         break;
-//     } else if (guess < targetNumber) {
-//         console.log("Too low! Try again.");
-//     } else {
-//         console.log("Too high! Try again.");
-//     }
-// }
-
-
-
-
 const dspMsg = document.querySelector("#dsp-msg");
 const checkGuess = document.querySelector("#check-guess");
 let userInput = document.querySelector("#user-input");
@@ -35,8 +12,10 @@ const minNumber = 1;
 const maxNumber = 50;
 let targetNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
 let attempts = 0;
-let maxAttempts = 10;
+let maxAttempts = 5;
 
+let gameInProgress = false; // keep track of game play
+newGame.disabled = true; // disable new game button initially
 
 // console.log(targetNumber);
 
@@ -72,7 +51,7 @@ checkGuess.addEventListener('click', (e) => {
     userInput = parseInt(document.querySelector("#user-input").value);
 
     if (isNaN(userInput) || userInput < minNumber || userInput > maxNumber) {
-        dspMsg.textContent = "Please enter a valid number within the specified range.";
+        dspMsg.textContent = `Please enter a number between ${minNumber} and ${maxNumber}.`;
         return;
     }
 
@@ -82,6 +61,7 @@ checkGuess.addEventListener('click', (e) => {
     if (userInput === targetNumber) {
         dspMsg.textContent = `${getRandomMessage(congratulatoryMessages)} You guessed the correct number "${targetNumber}" in ${attempts} attempt(s).`;
         document.querySelector("#check-guess").disabled = true;
+        disableGame(); // call function to disable game
     } else if (userInput < targetNumber) {
         dspMsg.textContent = "Too low! Try again.";
     } else {
@@ -93,7 +73,9 @@ checkGuess.addEventListener('click', (e) => {
     if (attempts === maxAttempts) {
         dspMsg.textContent = `${getRandomMessage(quirkyMessages)} The correct number was ${targetNumber}.`;
         document.querySelector("#check-guess").disabled = true;
+        disableGame(); // call function to disable game
     }
+  document.querySelector("#user-input").value = "";
 });
 
 
@@ -103,22 +85,44 @@ checkGuess.addEventListener('click', (e) => {
 newGame.addEventListener('click', (e) => {
     console.log("New game button clicked");
     e.preventDefault();
+    resetGame();
+});
+
+function resetGame() {
     attempts = 0;
     targetNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
-    // console.log(`New target number: ${targetNumber}`)
+    gameInProgress = false; // Reset game state
+    newGame.disabled = false; // Enable New Game button
     document.querySelector("#check-guess").disabled = false;
-
-
     document.querySelector("#user-input").value = "";
     dspMsg.textContent = `New game started! Guess a number between ${minNumber} and ${maxNumber}.`;
     attemptsElement.textContent = `Attempts left: ${maxAttempts}`;
-});
+}
+
+
+function disableGame() {
+    gameInProgress = false; // Reset game state
+    newGame.disabled = false; // Enable New Game button
+}
 
 
 
+// while (attempts < maxAttempts) {
+//     guess = parseInt(prompt(`Guess a number between ${minNumber} and ${maxNumber} (${maxAttempts - attempts} attempts left): `));
 
+//     if (isNaN(guess) || guess < minNumber || guess > maxNumber) {
+//         console.log("Please enter a valid number within the specified range.");
+//         continue;
+//     }
 
+//     attempts++;
 
-
- 
- 
+//     if (guess === targetNumber) {
+//         console.log(`Congratulations! You guessed the correct number ${targetNumber} in ${attempts} attempt(s).`);
+//         break;
+//     } else if (guess < targetNumber) {
+//         console.log("Too low! Try again.");
+//     } else {
+//         console.log("Too high! Try again.");
+//     }
+// }
