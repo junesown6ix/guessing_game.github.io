@@ -92,7 +92,7 @@ function resetGame() {
     attempts = 0;
     targetNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
     gameInProgress = false; // Reset game state
-    newGame.disabled = false; // Enable New Game button
+    newGame.disabled = true; // Enable New Game button
     document.querySelector("#check-guess").disabled = false;
     document.querySelector("#user-input").value = "";
     dspMsg.textContent = `New game started! Guess a number between ${minNumber} and ${maxNumber}.`;
