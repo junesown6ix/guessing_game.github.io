@@ -28,6 +28,14 @@ p {
   margin-bottom: 10px;
 }
 
+#hint-disp {
+  font-style: italic;
+  /* border: 2px solid black; */
+  margin: 10px 0;
+  background-color: black;
+  color: white;
+}
+
 span {
   font-size: 1.5rem;
   font-weight: bold;

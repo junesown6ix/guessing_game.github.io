@@ -5,6 +5,9 @@ const checkGuess = document.querySelector("#check-guess");
 let userInput = document.querySelector("#user-input");
 const attemptsElement = document.querySelector("#attempt-left");
 const newGame = document.querySelector("#new-game");
+const hintBtn = document.querySelector("#get-hint");
+const hintDisplay = document.getElementById('hint-disp');
+// const difficultLevelDropdown = document.querySelector("#difficulty-level");
 
 
 
@@ -18,6 +21,7 @@ let gameInProgress = false; // keep track of game play
 newGame.disabled = true; // disable new game button initially
 let gameWon = false; // Flag to track game won
 let gameLost = false; // Flag to track game lost
+let currentHint = "";
 
 // console.log(targetNumber);
 
@@ -46,7 +50,31 @@ function getRandomMessage(messagesArray) {
 }
 
 
+//event listener to the hint button
 
+hintBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (currentHint === "") {
+        //generate a random hint based on the target number 
+    const targetNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
+    currentHint = generateHint(targetNumber);
+    }
+    
+
+    hintDisplay.textContent = currentHint;
+
+    // alert(currentHint);
+
+
+});
+
+function generateHint(targetNumber) {
+    if (targetNumber % 2 === 0) {
+        return "The target number is even.";
+    } else {
+        return "The target number is odd."
+    }
+}
 
 checkGuess.addEventListener('click', (e) => {
     e.preventDefault();
@@ -98,6 +126,52 @@ checkGuess.addEventListener('click', (e) => {
 });
 
 
+// difficultLevelDropdown.addEventListener('change', (e) => {
+//     e.preventDefault();
+//     console.log("i was selected");
+    
+//     const selectedDifficulty = difficultLevelDropdown.value;
+
+//     //update game params based on selected difficulty
+
+//     updateGameParams(selectedDifficulty);
+// });
+
+
+//function to update game params based on the selected difficulty 
+/*function updateGameParams(difficulty) {
+    //adjusting the range of numbers and max attempts based on level
+    let minNumber, maxNumber, maxAttempts;
+
+    switch (difficulty) {
+        case 'easy': 
+            minNumber = 1;
+            maxNumber = 50;
+            maxAttempts = 5;
+            break;
+        case 'medium':
+            minNumber = 1;
+            maxNumber = 100;
+            maxAttempts = 3;
+            break;
+        case 'hard':
+            minNumber = 1;
+            maxNumber = 500;
+            maxAttempts = 2;
+            break;
+            default:
+                // default to medium difficulty
+            minNumber = 1;
+            maxNumber = 100;
+            maxAttempts = 3;
+            break;
+    }
+
+    document.getElementById('difficulty-level-disp').textContent = difficulty.toUpperCase();
+
+    document.get
+}
+*/
 
 
 
@@ -115,6 +189,7 @@ function resetGame() {
     document.querySelector("#check-guess").disabled = false;
     document.querySelector("#user-input").value = "";
     dspMsg.textContent = `New game started! Guess a number between ${minNumber} and ${maxNumber}.`;
+    hintDisplay.textContent = '';
     attemptsElement.textContent = `Attempts left: ${maxAttempts}`;
 }
 
