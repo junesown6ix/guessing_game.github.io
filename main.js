@@ -23,7 +23,7 @@ let gameWon = false; // Flag to track game won
 let gameLost = false; // Flag to track game lost
 let currentHint = "";
 
-// console.log(targetNumber);
+console.log(targetNumber);
 
 // using array for quirky/sarcastic messages
 const quirkyMessages = [
@@ -60,8 +60,9 @@ hintBtn.addEventListener('click', (e) => {
     currentHint = generateHint(targetNumber);
     }
     
+    console.log(`the targetNumber is ${targetNumber} and the hint is ${generateHint(targetNumber)}`)
 
-    hintDisplay.textContent = currentHint;
+    hintDisplay.textContent = generateHint(targetNumber);
 
     // alert(currentHint);
 
@@ -74,6 +75,7 @@ function generateHint(targetNumber) {
     } else {
         return "The target number is odd."
     }
+    
 }
 
 checkGuess.addEventListener('click', (e) => {
@@ -184,6 +186,7 @@ newGame.addEventListener('click', (e) => {
 function resetGame() {
     attempts = 0;
     targetNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
+    console.log(targetNumber);
     gameInProgress = false; // Reset game state
     newGame.disabled = true; // Enable New Game button
     document.querySelector("#check-guess").disabled = false;
