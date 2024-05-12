@@ -6,15 +6,27 @@
 
 body {
   font-family: 'Courier New', Courier, monospace;
+  background-color: #8462e0;
+}
+
+.background {
+  background: linear-gradient(to bottom right, #ADD8E6, #007bff, #DA70D6); /* Light blue to blue to light violet */
+  height: 100vh; /* Full height of the viewport */
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
 }
 
 .container {
-  padding: 5vw; /* Use viewport units for padding */
+  padding: 10vw 5vw; /*Use viewport units for padding */
   text-align: center;
   max-width: 700px; /* Use max-width instead of fixed width */
-  width: 80%; /* Use percentage width for fluid layout */
-  background: grey;
-  margin: 50px auto;
+  width: 50%; /*Use percentage width for fluid layout*/
+  /* background-color: rgba(255, 218, 185, 0.8); */
+  background-color: rgba(255, 255, 224, 0.5);
+  margin: 5px auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /*Box shadow for a bit of depth */
+  border-radius: 15px;
 }
 
 h1 {
@@ -26,14 +38,6 @@ h1 {
 p {
   font-weight: bold;
   margin-bottom: 10px;
-}
-
-#hint-disp {
-  font-style: italic;
-  /* border: 2px solid black; */
-  margin: 10px 0;
-  background-color: black;
-  color: white;
 }
 
 span {
@@ -52,6 +56,8 @@ input {
 }
 
 button {
+  background-color: #007bff;
+  color: black;
   padding: 10px;
   border-radius: 8px;
   border: none;
