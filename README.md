@@ -1,1 +1,1 @@
-The game allows you 10 attempts to guess a number
+The game allows you 5 attempts to guess a number
